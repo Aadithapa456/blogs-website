@@ -1,11 +1,15 @@
+
 import ThirdParty from "@/components/ThirdParty";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import React from "react";
-import { FaGoogle } from "react-icons/fa";
+
 const Register = () => {
-  const handleGoogleLogin = () => {};
+
+
+
+
   return (
     <div className="grid h-full w-full gap-10 px-3 md:grid-cols-2">
       <div className="image-section hidden self-center justify-self-end md:block">
