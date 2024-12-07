@@ -3,6 +3,7 @@ import React from "react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 
+
 const ThirdParty = () => {
 
   const handleLogin = async (event, provider) => {
@@ -29,6 +30,8 @@ const ThirdParty = () => {
         <FaGithub />
         Sign Up With GitHub
       </button>
+      </div>
+
     </div>
   );
 };
