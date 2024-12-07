@@ -1,11 +1,15 @@
+
 import ThirdParty from "@/components/ThirdParty";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import React from "react";
-import { FaGoogle } from "react-icons/fa";
+
 const Register = () => {
-  const handleGoogleLogin = () => {};
+
+
+
+
   return (
     <div className="h-full w-full bg-red-400 p-4">
       <div className="register-left">
@@ -31,8 +35,9 @@ const Register = () => {
             Log In
           </a>
         </div>
-        <ThirdParty />
-        <Checkbox />
+        <div className="w-full">
+          <ThirdParty />
+          </div>
       </form>
     </div>
   );
