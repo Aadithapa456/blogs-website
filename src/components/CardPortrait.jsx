@@ -12,9 +12,7 @@ const CardPortrait = ({ title, tags, image }) => {
         </div> */}
       </div>
       <div className="blog-card-contents px-3 py-2">
-        <div className="blog-title text-xl font-bold">
-          5 Things I'm Glad I Bought at that moment.
-        </div>
+        <div className="blog-title text-xl font-bold">{title}</div>
         <div className="blog-description mt-3 text-sm text-gray-700">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui,
           itaque nulla illum ullam velit, dolorum incidunt tenetur vero

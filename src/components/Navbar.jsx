@@ -6,7 +6,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 const Navitems = ({ children, href }) => {
   return (
     <>
-      <li className="m-2 cursor-pointer rounded-sm border border-gray-400 bg-white px-4 py-2 transition duration-300 hover:bg-gray-300">
+      <li className="m-2 cursor-pointer rounded-sm border border-gray-400 bg-white px-4 py-2 transition duration-300 hover:bg-gray-300 md:border-none md:bg-gray-300">
         <a href={href}>{children}</a>
       </li>
     </>
@@ -29,7 +29,7 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <nav>
+    <nav className="mx-20 gap-40 md:flex md:flex-row md:justify-between">
       <div className="nav-left flex items-center justify-around gap-52 py-4">
         <Image
           src={

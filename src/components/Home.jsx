@@ -13,7 +13,7 @@ import CardPortrait from "./CardPortrait";
 const Home = ({ data }) => {
   return (
     <>
-      <div className="home-cards flex flex-col gap-10 md:flex-row md:gap-4">
+      <div className="home-cards flex flex-col gap-40 md:flex-row md:gap-4 md:justify-center">
         <div className="home-card-left relative self-center overflow-hidden rounded-lg shadow-md">
           <Image
             src={
@@ -46,7 +46,7 @@ const Home = ({ data }) => {
                     key={card.id}
                     title={card.title}
                     tags={card.tag_list}
-                    image = {card.social_image}
+                    image={card.social_image}
                   />
                 );
               })

@@ -1,16 +1,14 @@
-'use client'
+"use client";
 import React from "react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { signIn } from "next-auth/react";
 
-
 const ThirdParty = () => {
-
   const handleLogin = async (event, provider) => {
     event.preventDefault();
     const result = signIn(provider);
-    console.log("okay")
-  }
+    console.log("okay");
+  };
 
   return (
     <div className="third-party-signup">
@@ -30,8 +28,6 @@ const ThirdParty = () => {
         <FaGithub />
         Sign Up With GitHub
       </button>
-      </div>
-
     </div>
   );
 };
