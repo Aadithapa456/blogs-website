@@ -1,24 +1,21 @@
-"use client";
-import Home from "@/components/Home";
-import Login from "@/components/Login";
-import Navbar from "@/components/Navbar";
-import Register from "@/components/Register";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+"use client";  // This ensures the component is client-side
+
+import { useSession } from "next-auth/react";
+
 export default function Page() {
-  const [articleList, setArticleList] = useState([]);
-  const getArticles = async () => {
-    const response = await fetch("https://dev.to/api/articles");
-    const data = await response.json();
-    setArticleList(data);
-  };
-  useEffect(() => {
-    getArticles();
-  }, []);
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (!session) {
+    return <p>You are not logged in!</p>;
+  }
+
   return (
-    <div className="h-full w-full bg-gray-300">
-      <Navbar />
-      <Home data={articleList} />
+    <div>
+      <h1>Welcome, {session.user.email}</h1>
     </div>
   );
 }
