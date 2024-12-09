@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 import { Badge } from "./ui/badge";
 const CardPortrait = ({ title, description, tags, image, url }) => {
-  console.log(tags);
   return (
     <div className="mx-auto flex flex-col items-center gap-4 rounded-lg bg-white px-4 py-4 shadow-md lg:mx-0 lg:mb-8">
       <div className="blog-card-top mb-2">

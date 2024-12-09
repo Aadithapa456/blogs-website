@@ -1,73 +1,74 @@
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
-import { Badge } from "./ui/badge";
-
-const Modal = () => {
+import { Button } from "./ui/button";
+const Modal = ({ onSelectedItems }) => {
   const [isShown, setVisibility] = useState(true);
+  const [activeItems, setActiveItems] = useState([]);
+  const labelItems = ["HTML", "CSS", "JavaScript", "Python", "React"];
+  const selectedItems = () => {
+    const selectedLabels = activeItems.map((index) => labelItems[index]);
+    onSelectedItems(selectedLabels);
+    setVisibility(false);
+  };
+  //  Toggles the selection of an item.
+  const toggleItem = (index) => {
+    setActiveItems(
+      (prev) =>
+        prev.includes(index)
+          ? prev.filter((item) => item !== index) // Remove the index if already selected
+          : [...prev, index], // Add the index if not selected
+    );
+  };
   return (
-    <div className="flex h-screen w-screen items-center justify-center">
+    <>
       {isShown && (
-        <div className="modal-container grid justify-items-center space-y-5 rounded-xl bg-blue-300 p-5 sm:w-1/2 xl:w-[40%]">
-          <div className="cross-button-section mb-5 justify-self-end">
-            <button
-              onClick={() => {
-                setVisibility(!isShown);
-              }}
-              className="cursor-pointer"
-            >
-              <ImCross />
-            </button>
-          </div>
-          <div className="modal-title">
-            <h1 className="text-xl font-bold">What are your preferences?</h1>
-          </div>
-          <div className="prefer-buttons grid grid-cols-2 gap-3 pb-10 md:grid-cols-3">
-            <Badge
-              className={
-                "w-full cursor-pointer justify-center truncate px-4 py-2 md:w-auto"
-              }
-            >
-              HTML
-            </Badge>
-            <Badge
-              className={
-                "w-full cursor-pointer justify-center truncate px-4 py-2 md:w-auto"
-              }
-            >
-              CSS
-            </Badge>
-            <Badge
-              className={
-                "w-full cursor-pointer justify-center truncate px-4 py-2 md:w-auto"
-              }
-            >
-              JavaScript
-            </Badge>
-            <Badge
-              className={
-                "w-full cursor-pointer justify-center truncate px-4 py-2 md:w-auto"
-              }
-            >
-              Python
-            </Badge>
-            <Badge
-              className={
-                "w-full cursor-pointer justify-center truncate px-4 py-2 md:w-auto"
-              }
-            >
-              React
-            </Badge>
-          </div>
-          <div className="next-button-section justify-self-center">
-            <button className="group relative mb-2 me-2 inline-flex items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-green-400 to-blue-600 p-0.5 text-sm font-medium text-gray-900 hover:text-white focus:outline-none focus:ring-4 focus:ring-green-200 group-hover:from-green-400 group-hover:to-blue-600 dark:text-white dark:focus:ring-green-800">
-              <span className="relative rounded-md bg-white px-5 py-2.5 transition-all duration-75 ease-in group-hover:bg-opacity-0 dark:bg-gray-900">
+        <div className="t-0 fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className="modal-container grid space-y-5 rounded-xl bg-white p-5 px-10 sm:w-1/2 xl:w-[40%]">
+            <div className="modal-top flex flex-row-reverse items-center justify-between pb-6 pt-3">
+              <div className="cross-button-section">
+                <button
+                  onClick={() => {
+                    setVisibility(!isShown);
+                  }}
+                  className="cursor-pointer text-sm"
+                >
+                  <ImCross />
+                </button>
+              </div>
+              <div className="modal-title">
+                <h1 className="text-2xl font-bold">
+                  What are your preferences?
+                </h1>
+              </div>
+            </div>
+            <div className="prefer-buttons grid grid-cols-2 gap-x-5 gap-y-6 pb-10 md:grid-cols-3">
+              {labelItems.map((item, index) => (
+                <span
+                  key={index}
+                  className={`cursor-pointer self-start rounded-lg border border-gray-300 px-3 py-1.5 text-sm shadow-md transition duration-300 hover:border-gray-600 hover:bg-gray-200 ${
+                    activeItems.includes(index)
+                      ? "bg-gray-800 text-white hover:bg-gray-700"
+                      : ""
+                  }`}
+                  onClick={() => toggleItem(index)}
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+            <div className="next-button-section justify-self-center">
+              <Button
+                variant="outline"
+                className="px-10"
+                onClick={() => selectedItems()}
+              >
                 Next
-              </span>
-            </button>
+              </Button>
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

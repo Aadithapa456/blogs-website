@@ -10,9 +10,16 @@ import {
 import Cardlandscape from "./CardLandscape";
 import Image from "next/image";
 import CardPortrait from "./CardPortrait";
+import Modal from "./Modal";
+
 const Home = ({ data }) => {
+  const handleSelectedItems = (items) => {
+    // setSelectedItems(items);
+    console.log("Selected Items:", items);
+  };
   return (
     <>
+      <Modal onSelectedItems={handleSelectedItems}/>
       <div className="home-cards mt-6 flex flex-col gap-10 md:flex-row md:justify-center md:gap-20 lg:mt-9 lg:gap-96">
         <div className="home-card-left relative w-80 self-center overflow-hidden rounded-lg shadow-md lg:w-96">
           <Image
