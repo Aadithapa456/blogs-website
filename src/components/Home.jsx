@@ -10,11 +10,18 @@ import {
 import Cardlandscape from "./CardLandscape";
 import Image from "next/image";
 import CardPortrait from "./CardPortrait";
+import Modal from "./Modal";
+
 const Home = ({ data }) => {
+  const handleSelectedItems = (items) => {
+    // setSelectedItems(items);
+    console.log("Selected Items:", items);
+  };
   return (
     <>
-      <div className="home-cards flex flex-col gap-40 md:flex-row md:gap-4 md:justify-center">
-        <div className="home-card-left relative self-center overflow-hidden rounded-lg shadow-md">
+      <Modal onSelectedItems={handleSelectedItems}/>
+      <div className="home-cards mt-6 flex flex-col gap-10 md:flex-row md:justify-center md:gap-20 lg:mt-9 lg:gap-96">
+        <div className="home-card-left relative w-80 self-center overflow-hidden rounded-lg shadow-md lg:w-96">
           <Image
             src={
               "https://media.discordapp.net/attachments/1275803991804084258/1314963682337230928/image.png?ex=6755aedc&is=67545d5c&hm=e5d2b7cd8203fcd76bf366e882e4481462a506abd2f36de773e11af0bb9ba530&=&format=webp&quality=lossless&width=687&height=701"
@@ -34,11 +41,11 @@ const Home = ({ data }) => {
           <Cardlandscape />
         </div>
       </div>
-      <div className="latest-articles">
-        <div className="latest font-poppins text-2xl font-extrabold text-red-600">
+      <div className="latest-articles flex flex-col px-20">
+        <div className="latest mb-4 py-10 font-poppins text-3xl font-extrabold text-red-600">
           Latest Articles
         </div>
-        <div className="latest-articles-grid grid grid-cols-1 gap-4 p-4 md:grid-cols-3 lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]">
+        <div className="latest-articles-grid grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-10 md:gap-y-11 lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]">
           {data
             ? data.map((card) => {
                 return (
@@ -47,6 +54,8 @@ const Home = ({ data }) => {
                     title={card.title}
                     tags={card.tag_list}
                     image={card.social_image}
+                    description={card.description}
+                    url={card.url}
                   />
                 );
               })

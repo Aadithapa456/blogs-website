@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export default function Page() {
   // const { data: session, status } = useSession();
   const [articleList, setArticleList] = useState([]);
+  const [category, setCategory] = useState([]);
   const getArticles = async () => {
     const response = await fetch("https://dev.to/api/articles");
     const data = await response.json();
@@ -22,11 +23,11 @@ export default function Page() {
   // if (!session) {
   //   return <p>You are not logged in!</p>;
   // }
-
+  console.log(category);
   return (
     <>
       <Navbar />
-      <Home data={articleList.slice(0,6)} />
+      <Home data={articleList.slice(0, 6)} onSelected={setCategory} />
     </>
   );
 }

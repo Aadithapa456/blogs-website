@@ -1,35 +1,39 @@
 import Image from "next/image";
 import React from "react";
 import { Badge } from "./ui/badge";
-const CardPortrait = ({ title, tags, image }) => {
-  console.log(tags);
+const CardPortrait = ({ title, description, tags, image, url }) => {
   return (
-    <div className="mx-auto flex flex-col rounded-lg bg-white px-4 py-4 lg:mx-0">
+    <div className="mx-auto flex flex-col items-center gap-4 rounded-lg bg-white px-4 py-4 shadow-md lg:mx-0 lg:mb-8">
       <div className="blog-card-top mb-2">
         <Image src={image} width={350} height={100} alt="Image"></Image>
         {/* <div className="blog-title absolute left-0 right-0 top-48 mx-auto w-3/4 bg-gray-300 px-6 py-4">
           {title}
         </div> */}
       </div>
-      <div className="blog-card-contents px-3 py-2">
+      <div className="blog-card-contents px-3 py-6">
         <div className="blog-title text-xl font-bold">{title}</div>
         <div className="blog-description mt-3 text-sm text-gray-700">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus qui,
-          itaque nulla illum ullam velit, dolorum incidunt tenetur vero
-          laudantium id labore!
+          {description}
         </div>
       </div>
-      <div className="blog-label mb-2 mt-4 grid grid-cols-[repeat(auto-fit,_minmax(120px,_1fr))] gap-4 p-4">
-        {tags.map((tag, index) => {
-          return (
-            <Badge
-              key={index}
-              className={"w-full cursor-pointer truncate px-4 py-2 md:w-auto"}
-            >
-              {tag}
-            </Badge>
-          );
-        })}
+      <div className="mb-4 mt-auto flex w-full flex-wrap items-center justify-center gap-2">
+        {tags.map((label, index) => (
+          <span
+            key={index}
+            className="cursor-pointer self-start rounded-lg border border-gray-300 px-3 py-1.5 text-sm shadow-md transition duration-300 hover:border-gray-600 hover:bg-gray-200"
+          >
+            {label}
+          </span>
+        ))}
+      </div>
+      <div className="read-more mx-auto my-6 self-stretch">
+        <a
+          href={url}
+          target="_blank"
+          className="rounded-lg border border-gray-300 px-6 py-3 text-center shadow-md transition duration-300 hover:border-gray-600 hover:bg-gray-200"
+        >
+          Read More
+        </a>
       </div>
     </div>
   );
