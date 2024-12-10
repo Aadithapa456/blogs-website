@@ -1,8 +1,10 @@
 import React from "react";
 
-const Cardlandscape = () => {
+const Cardlandscape = (props) => {
   return (
-    <div className="mx-auto mb-4 h-44 w-2/3 bg-gray-400 md:h-40 md:w-52 lg:h-44 lg:w-72"></div>
+    <div className="box flex h-32 w-64 items-center justify-center border-2 border-black bg-slate-800 text-2xl font-bold text-white">
+        {props.title}
+      </div>
   );
 };
 

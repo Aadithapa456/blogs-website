@@ -35,11 +35,9 @@ const Home = ({ data }) => {
             A shadow is caused by an object when it blocks light.
           </div>
         </div>
-        <div className="home-card-right">
           <Cardlandscape />
           <Cardlandscape />
           <Cardlandscape />
-        </div>
       </div>
       <div className="latest-articles flex flex-col px-20">
         <div className="latest mb-4 py-10 font-poppins text-3xl font-extrabold text-red-600">
