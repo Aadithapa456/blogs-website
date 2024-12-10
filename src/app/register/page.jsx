@@ -1,10 +1,25 @@
+'use client'
+
 import ThirdParty from "@/components/ThirdParty";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import Image from "next/image";
 import React from "react";
 
 const Register = () => {
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const email = formData.get('email');
+    const password = formData.get('password');
+    const name = formData.get('name');
+    const data = { email, password, name };
+    const result = await axios.post('/api/auth', data);
+    console.log(result);
+  };
+
   return (
     <div className="grid h-full w-full gap-10 px-3 md:grid-cols-2">
       <div className="image-section hidden self-center justify-self-end md:block">
@@ -46,32 +61,35 @@ const Register = () => {
                 <div className="brand-name font-poppins">BlogSpot</div>
               </div>
               <div className="mb-5 font-bold">Sign Up to Continue</div>
-              <form className="space-y-5" action="">
+              <form className="space-y-5" onSubmit={handleRegister}>
                 <div className="email-section">
-                  <label className="ml-5 text-sm text-gray-500" htmlFor="">
-                    Login
+                  <label className="ml-5 text-sm text-gray-500" htmlFor="name">
+                    Name
                   </label>
                   <Input
                     className="bg-gray-200 text-sm"
-                    type="name"
+                    type="text"
+                    name="name"
                     placeholder="Enter your name"
                   />
-                  <label className="ml-5 text-sm text-gray-500" htmlFor="">
-                    Login
+                  <label className="ml-5 text-sm text-gray-500" htmlFor="email">
+                    Email
                   </label>
                   <Input
                     className="bg-gray-200 text-sm"
                     type="email"
+                    name="email"
                     placeholder="Email..."
                   />
                 </div>
                 <div className="password-section">
-                  <label className="ml-5 text-sm text-gray-500" htmlFor="">
+                  <label className="ml-5 text-sm text-gray-500" htmlFor="password">
                     Password
                   </label>
                   <Input
                     className="bg-gray-200 text-sm"
-                    type="email"
+                    type="password"
+                    name="password"
                     placeholder="Password..."
                   />
                 </div>
@@ -84,6 +102,9 @@ const Register = () => {
                     <p className="text-sm text-blue-300">Forgot Password?</p>
                   </div>
                 </div>
+                <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
+                  Register
+                </button>
               </form>
               <ThirdParty />
             </div>

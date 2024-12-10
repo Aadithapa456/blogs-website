@@ -1,6 +1,8 @@
 import dbConnect from "@/db/dbConnection";
 import { User } from "@/modals/userModal";
-import { hashPassword } from "@/lib/password"; //
+import { hashPassword } from "@/lib/password"; 
+import { NextResponse } from 'next/server'
+
 
 export async function POST(req, res) {
   const { email, password, name } =  await req.json();
@@ -11,7 +13,7 @@ export async function POST(req, res) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
-        { error: 'User Already Exist' },
+        { error: 'User Already Exist', existingUser },
         { status: 400 }
       )}
 

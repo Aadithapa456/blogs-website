@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { signOut } from "next-auth/react";
 
 const NavItem = ({ children, href }) => {
   return (
@@ -60,9 +61,24 @@ const Navbar = () => {
         <NavItem href="/">Home</NavItem>
         <NavItem href="/about">About</NavItem>
         <NavItem href="/contact">Contact</NavItem>
+        <SignOutButton />
       </ul>
     </nav>
   );
 };
 
 export default Navbar;
+const SignOutButton = () => {
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
+  return (
+    <button
+      onClick={handleSignOut}
+      className="m-2 cursor-pointer rounded-sm border border-gray-400 bg-white px-4 py-2 transition duration-300 hover:bg-gray-300 hover:text-[#dc2626] md:border-none md:bg-gray-300"
+    >
+      Sign Out
+    </button>
+  );
+};

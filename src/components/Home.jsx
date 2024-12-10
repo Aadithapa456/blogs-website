@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "./ui/card";
+
 import Cardlandscape from "./CardLandscape";
 import Image from "next/image";
 import CardPortrait from "./CardPortrait";

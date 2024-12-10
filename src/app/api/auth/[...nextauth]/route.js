@@ -3,6 +3,8 @@ import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { User } from "@/modals/userModal";
+import dbConnect from "@/db/dbConnection";
+import { verifyPassword } from "@/lib/password";
 
 
 export const authOptions = {
@@ -41,13 +43,15 @@ export const authOptions = {
     
   ],
   callbacks: {
-    async session({ session, user }) {
-      session.user.id = user.id;
+    async session({ session, token }) {
+      if (token && token.id) {
+        session.user.id = token.id;
+      }
       return session;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
-        token.id = user.id;
+        token.id = user.id || user._id; 
       }
       return token;
     },
