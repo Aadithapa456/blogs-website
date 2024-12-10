@@ -5,7 +5,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 const NavItem = ({ children, href }) => {
   return (
-    <li className="m-2 cursor-pointer rounded-sm border border-gray-400 bg-white px-4 py-2 transition duration-300 hover:bg-gray-300 md:border-none md:bg-gray-300">
+    <li className="m-2 cursor-pointer rounded-sm border border-gray-400 bg-white px-4 py-2 transition duration-300 hover:bg-gray-300 hover:text-[#dc2626] md:border-none md:bg-gray-300">
       <a href={href}>{children}</a>
     </li>
   );
@@ -44,14 +44,14 @@ const Navbar = () => {
 
   return (
     <nav
-      className="mx-20 gap-40 md:flex md:flex-row md:justify-between"
+      className="mx-20 items-center gap-40 md:flex md:flex-row md:justify-between"
       ref={navRef}
     >
-      <div className="nav-left flex items-center justify-around gap-52 py-4">
+      <div className="nav-left my-3 flex items-center justify-around gap-52">
         <Image
           src="https://media.discordapp.net/attachments/1275803991804084258/1314958653173792789/image.png?ex=6755aa2d&is=675458ad&hm=f1207d068336d74b4ddb965d67018f88bf790a385f8686269b8258f81c966aee&=&format=webp&quality=lossless"
-          width={60}
-          height={60}
+          width={100}
+          height={100}
           alt="Logo"
         />
         {isMobile && <GiHamburgerMenu onClick={toggleNavbar} />}
