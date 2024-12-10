@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "./ui/badge";
 const CardPortrait = ({ title, description, tags, image, url }) => {
   return (
-    <div className="mx-auto flex flex-col items-center gap-4 rounded-lg bg-white px-4 py-4 shadow-md lg:mx-0 lg:mb-8">
+    <div className="mx-auto flex flex-col items-center gap-4 rounded-lg bg-white px-4 py-4 shadow-md lg:mx-0 lg:mb-8 hover:scale-105 transition-transform cursor-default">
       <div className="blog-card-top mb-2">
         <Image src={image} width={350} height={100} alt="Image"></Image>
         {/* <div className="blog-title absolute left-0 right-0 top-48 mx-auto w-3/4 bg-gray-300 px-6 py-4">
