@@ -31,8 +31,6 @@ const ThirdParty = () => {
         Sign Up With GitHub
       </button>
       </div>
-
-    </div>
   );
 };
 
