@@ -17,6 +17,11 @@ const Home = ({ data }) => {
     // setSelectedItems(items);
     console.log("Selected Items:", items);
   };
+  const postsPerPage = 8;
+  const currentPage = 1;
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = data.slice(firstPostIndex, lastPostIndex);
   return (
     <>
       <Modal onSelectedItems={handleSelectedItems} />
@@ -46,8 +51,8 @@ const Home = ({ data }) => {
           Latest Articles
         </div>
         <div className="latest-articles-grid grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-10 md:gap-y-11 lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]">
-          {data
-            ? data.map((card) => {
+          {currentPosts
+            ? currentPosts.map((card) => {
                 return (
                   <CardPortrait
                     key={card.id}

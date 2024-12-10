@@ -27,7 +27,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <Home data={articleList.slice(0, 6)} onSelected={setCategory} />
+      <Home data={articleList} onSelected={setCategory} />
     </>
   );
 }
