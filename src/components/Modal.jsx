@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { Button } from "./ui/button";
+import axios from "axios";
 const Modal = ({ onSelectedItems }) => {
   const [isShown, setVisibility] = useState(true);
   const [activeItems, setActiveItems] = useState([]);
@@ -9,6 +10,7 @@ const Modal = ({ onSelectedItems }) => {
     const selectedLabels = activeItems.map((index) => labelItems[index]);
     onSelectedItems(selectedLabels);
     setVisibility(false);
+    const response = axios.post("/api/user", { selectedLabels });
   };
   //  Toggles the selection of an item.
   const toggleItem = (index) => {

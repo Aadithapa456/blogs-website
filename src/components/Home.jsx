@@ -17,9 +17,14 @@ const Home = ({ data }) => {
     // setSelectedItems(items);
     console.log("Selected Items:", items);
   };
+  const postsPerPage = 8;
+  const currentPage = 1;
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = data.slice(firstPostIndex, lastPostIndex);
   return (
     <>
-      <Modal onSelectedItems={handleSelectedItems}/>
+      <Modal onSelectedItems={handleSelectedItems} />
       <div className="home-cards mt-6 flex flex-col gap-10 md:flex-row md:justify-center md:gap-20 lg:mt-9 lg:gap-96">
         <div className="home-card-left relative w-80 self-center overflow-hidden rounded-lg shadow-md lg:w-96">
           <Image
@@ -46,8 +51,8 @@ const Home = ({ data }) => {
           Latest Articles
         </div>
         <div className="latest-articles-grid grid grid-cols-1 gap-y-6 md:grid-cols-3 md:gap-x-10 md:gap-y-11 lg:grid-cols-[repeat(auto-fit,_minmax(350px,_1fr))]">
-          {data
-            ? data.map((card) => {
+          {currentPosts
+            ? currentPosts.map((card) => {
                 return (
                   <CardPortrait
                     key={card.id}
