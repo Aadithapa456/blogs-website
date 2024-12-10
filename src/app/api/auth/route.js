@@ -1,23 +1,33 @@
-import { auth, db } from "@/lib/FirebaseConfig";
-import {  createUserWithEmailAndPassword } from "firebase/auth";
+import dbConnect from "@/db/dbConnection";
+import { User } from "@/modals/userModal";
+import { hashPassword } from "@/lib/password"; 
+import { NextResponse } from 'next/server'
 
 
-export default async function POST(req, res) {
-    const { email, password, name } = req.body;
+export async function POST(req, res) {
+  const { email, password, name } =  await req.json();
 
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+  try {
+    await dbConnect();
 
-      await setDoc(doc(db, "users", user.uid), {
-        name,
-        email,
-        createdAt: new Date(),
-      });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'User Already Exist', existingUser },
+        { status: 400 }
+      )}
 
-      res.status(201).json({ message: "User created successfully!", user });
-    } catch (error) {
-      console.error("Error during sign-up:", error);
-      res.status(400).json({ error: error.message });
-    }
+    const hashedPassword = await hashPassword(password);
+
+    const user = await User.create({ name, email, password: hashedPassword });
+
+    return NextResponse.json(
+      { success: 'User Created Successfully' },
+      { status: 200 }
+    )  } catch (error) {
+    console.error("Error during sign-up:", error);
+    return NextResponse.json(
+      { error: 'Something went wrong' },
+      { status: 500 }
+    )  }
 }

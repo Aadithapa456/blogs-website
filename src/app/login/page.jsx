@@ -1,10 +1,37 @@
+'use client'
+
 import ThirdParty from "@/components/ThirdParty";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
-const page = () => {
+const Page = () => {
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const response = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+
+      if (response?.ok) {
+        window.location.href = "/"; 
+      } else {
+        // Handle error
+        console.error("Login failed:", response?.error);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  }
+
   return (
     <div className="grid h-full w-full gap-10 px-3 md:grid-cols-2">
       <div className="image-section hidden self-center justify-self-end md:block">
@@ -14,6 +41,7 @@ const page = () => {
           width={500}
           height={500}
           alt="Image of an astronaut"
+          key="astronaut-image"
         />
       </div>
       <div className="login-page-section md:justify-self-start">
@@ -26,7 +54,7 @@ const page = () => {
           <div className="brand-name font-poppins">BlogSpot</div>
         </div>
         <div className="mb-5 font-bold">Nice to see you again</div>
-        <form className="space-y-3" action="">
+        <form className="space-y-3" onSubmit={handleLogin}>
           <div className="email-section">
             <label className="ml-3 text-sm text-gray-500" htmlFor="">
               Email
@@ -34,7 +62,8 @@ const page = () => {
             <Input
               className="focus mt-1 bg-gray-200 text-sm"
               type="email"
-              // placeholder="Enter your email"
+              name="email"
+              required
             />
           </div>
           <div className="password-section">
@@ -43,8 +72,9 @@ const page = () => {
             </label>
             <Input
               className="mt-1 bg-gray-200 text-sm"
-              type="email"
-              // placeholder="Password"
+              type="password"
+              name="password"
+              required
             />
           </div>
           <div className="memory flex justify-between">
@@ -58,6 +88,9 @@ const page = () => {
               </p>
             </div>
           </div>
+          <button className="w-full mt-4 py-2 bg-blue-500 text-white rounded-md">
+            Login
+          </button>
         </form>
         <ThirdParty content="Sign in" />
         <p className="mt-20 text-center text-sm">
@@ -69,4 +102,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { Button } from "./ui/button";
